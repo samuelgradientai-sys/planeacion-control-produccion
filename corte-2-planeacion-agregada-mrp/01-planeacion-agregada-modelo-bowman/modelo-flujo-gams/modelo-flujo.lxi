@@ -1,0 +1,53 @@
+B 3 C o m p i l a t i o n
+B 80 Equation Listing    SOLVE planeacionAgregada Using LP From line 68
+D 83 FO
+D 88 INVNETO1
+D 99 INVNETO2
+D 110 WORKFORCE
+D 121 PRODUCTION
+D 132 INVINICIAL
+D 137 INVINICIALHAND
+D 142 WFINICIAL
+B 148 Column Listing      SOLVE planeacionAgregada Using LP From line 68
+E 151 P
+E 173 I
+E 192 S
+E 211 LR
+E 236 LO
+E 255 Wplus
+E 273 Wminus
+E 291 OUTSOURCE
+E 310 z
+E 317 NI
+B 340 Range Statistics    SOLVE planeacionAgregada Using LP From line 68
+B 351 Model Statistics    SOLVE planeacionAgregada Using LP From line 68
+B 364 Solution Report     SOLVE planeacionAgregada Using LP From line 68
+F 397 FO
+F 401 INVNETO1
+F 417 INVNETO2
+F 433 WORKFORCE
+F 449 PRODUCTION
+F 468 INVINICIAL
+F 469 INVINICIALHAND
+F 470 WFINICIAL
+G 476 P
+G 493 I
+G 510 S
+G 527 LR
+G 544 LO
+G 561 Wplus
+G 578 Wminus
+G 595 OUTSOURCE
+G 614 z
+G 618 NI
+B 641 E x e c u t i o n
+I 643 z
+I 644 P
+I 649 I
+I 654 NI
+I 659 LR
+I 664 LO
+I 669 S
+I 674 Wplus
+I 679 Wminus
+I 684 OUTSOURCE

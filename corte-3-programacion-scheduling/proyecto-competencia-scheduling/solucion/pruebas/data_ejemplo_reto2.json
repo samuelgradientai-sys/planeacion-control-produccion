@@ -1,0 +1,402 @@
+[
+ {
+  "Trabajo": "J1",
+  "p_j": 16,
+  "r_j": 20,
+  "d_j": 36,
+  "w_j": 3,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J2",
+  "p_j": 44,
+  "r_j": 16,
+  "d_j": 60,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J3",
+  "p_j": 21,
+  "r_j": 18,
+  "d_j": 39,
+  "w_j": 2,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J4",
+  "p_j": 62,
+  "r_j": 25,
+  "d_j": 87,
+  "w_j": 5,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J5",
+  "p_j": 44,
+  "r_j": 30,
+  "d_j": 74,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J6",
+  "p_j": 23,
+  "r_j": 10,
+  "d_j": 33,
+  "w_j": 3,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J7",
+  "p_j": 14,
+  "r_j": 0,
+  "d_j": 14,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J8",
+  "p_j": 58,
+  "r_j": 12,
+  "d_j": 70,
+  "w_j": 3,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J9",
+  "p_j": 78,
+  "r_j": 28,
+  "d_j": 106,
+  "w_j": 2,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J10",
+  "p_j": 81,
+  "r_j": 24,
+  "d_j": 105,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J11",
+  "p_j": 52,
+  "r_j": 20,
+  "d_j": 72,
+  "w_j": 5,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J12",
+  "p_j": 53,
+  "r_j": 16,
+  "d_j": 69,
+  "w_j": 5,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J13",
+  "p_j": 16,
+  "r_j": 13,
+  "d_j": 29,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J14",
+  "p_j": 30,
+  "r_j": 21,
+  "d_j": 51,
+  "w_j": 3,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J15",
+  "p_j": 27,
+  "r_j": 17,
+  "d_j": 44,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J16",
+  "p_j": 53,
+  "r_j": 20,
+  "d_j": 73,
+  "w_j": 2,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J17",
+  "p_j": 81,
+  "r_j": 25,
+  "d_j": 106,
+  "w_j": 5,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J18",
+  "p_j": 52,
+  "r_j": 21,
+  "d_j": 73,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J19",
+  "p_j": 99,
+  "r_j": 19,
+  "d_j": 118,
+  "w_j": 2,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J20",
+  "p_j": 41,
+  "r_j": 28,
+  "d_j": 69,
+  "w_j": 2,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J21",
+  "p_j": 30,
+  "r_j": 26,
+  "d_j": 90,
+  "w_j": 5,
+  "Predecesores": "J2"
+ },
+ {
+  "Trabajo": "J22",
+  "p_j": 10,
+  "r_j": 15,
+  "d_j": 25,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J23",
+  "p_j": 65,
+  "r_j": 16,
+  "d_j": 81,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J24",
+  "p_j": 21,
+  "r_j": 21,
+  "d_j": 42,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J25",
+  "p_j": 86,
+  "r_j": 13,
+  "d_j": 99,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J26",
+  "p_j": 58,
+  "r_j": 11,
+  "d_j": 69,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J27",
+  "p_j": 18,
+  "r_j": 16,
+  "d_j": 99,
+  "w_j": 2,
+  "Predecesores": "J23"
+ },
+ {
+  "Trabajo": "J28",
+  "p_j": 10,
+  "r_j": 1,
+  "d_j": 11,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J29",
+  "p_j": 50,
+  "r_j": 27,
+  "d_j": 77,
+  "w_j": 2,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J30",
+  "p_j": 67,
+  "r_j": 24,
+  "d_j": 91,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J31",
+  "p_j": 23,
+  "r_j": 20,
+  "d_j": 129,
+  "w_j": 3,
+  "Predecesores": "J17"
+ },
+ {
+  "Trabajo": "J32",
+  "p_j": 15,
+  "r_j": 5,
+  "d_j": 20,
+  "w_j": 3,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J33",
+  "p_j": 21,
+  "r_j": 23,
+  "d_j": 44,
+  "w_j": 3,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J34",
+  "p_j": 95,
+  "r_j": 26,
+  "d_j": 121,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J35",
+  "p_j": 28,
+  "r_j": 2,
+  "d_j": 30,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J36",
+  "p_j": 26,
+  "r_j": 29,
+  "d_j": 55,
+  "w_j": 1,
+  "Predecesores": "J22"
+ },
+ {
+  "Trabajo": "J37",
+  "p_j": 12,
+  "r_j": 15,
+  "d_j": 27,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J38",
+  "p_j": 47,
+  "r_j": 21,
+  "d_j": 68,
+  "w_j": 5,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J39",
+  "p_j": 65,
+  "r_j": 8,
+  "d_j": 73,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J40",
+  "p_j": 83,
+  "r_j": 5,
+  "d_j": 88,
+  "w_j": 5,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J41",
+  "p_j": 71,
+  "r_j": 10,
+  "d_j": 81,
+  "w_j": 3,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J42",
+  "p_j": 43,
+  "r_j": 10,
+  "d_j": 53,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J43",
+  "p_j": 70,
+  "r_j": 17,
+  "d_j": 87,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J44",
+  "p_j": 14,
+  "r_j": 12,
+  "d_j": 26,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J45",
+  "p_j": 49,
+  "r_j": 28,
+  "d_j": 77,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J46",
+  "p_j": 53,
+  "r_j": 2,
+  "d_j": 55,
+  "w_j": 5,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J47",
+  "p_j": 76,
+  "r_j": 23,
+  "d_j": 99,
+  "w_j": 4,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J48",
+  "p_j": 71,
+  "r_j": 14,
+  "d_j": 85,
+  "w_j": 1,
+  "Predecesores": ""
+ },
+ {
+  "Trabajo": "J49",
+  "p_j": 36,
+  "r_j": 12,
+  "d_j": 75,
+  "w_j": 5,
+  "Predecesores": "J3"
+ },
+ {
+  "Trabajo": "J50",
+  "p_j": 87,
+  "r_j": 18,
+  "d_j": 105,
+  "w_j": 4,
+  "Predecesores": ""
+ }
+]

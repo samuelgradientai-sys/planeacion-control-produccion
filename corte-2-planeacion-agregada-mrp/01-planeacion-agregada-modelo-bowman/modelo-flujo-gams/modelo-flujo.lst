@@ -1,0 +1,702 @@
+GAMS 54.3.1  61154be4 Aug 21, 2026          WEX-WEI x86 64bit/MS Windows - 09/10/26 08:02:18 Page 1
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+C o m p i l a t i o n
+
+
+   1  Sets
+   2  T periodos /1*12/;
+   3   
+   4  Parameters
+   5  Demand(T)
+   6  /
+   7  1  2600
+   8  2  3400
+   9  3  3900
+  10  4  5300
+  11  5  4250
+  12  6  4200
+  13  7  3800
+  14  8  4500
+  15  9  4300
+  16  10 3800
+  17  11 3600
+  18  12 3000
+  19  /;
+  20   
+  21  scalar
+  22  c costo de produccion /80/
+  23  h /2.7/
+  24  CF /10000/
+  25  CR /12/
+  26  CO /18/
+  27  CWplus /10/
+  28  CWminus /37/
+  29  Cutso /95/;
+  30   
+  31  Positive Variables
+  32  P(T) produccion en el periodo t
+  33  I(T) inventario a la mano en el periodo t
+  34  S(T) faltantes en el periodo T
+  35  LR(T) horas de trabajo en tiempo regular en el periodo T
+  36  LO(T) horas de trabajo extra en el periodo T
+  37  Wplus(T) aumento en la fuerza de trabajo en el periodo T
+  38  Wminus(T) reduccion en la fuerza de trabajo en el periodo T
+  39  OUTSOURCE(T) unidades subcontratadas en el periodo T
+  40  ;
+  41   
+  42  free variables
+  43  z valor de la funcion objetivo
+  44  NI(T) inventario neto
+  45  ;
+  46   
+  47  equations
+  48  FO definicion de la funcion objetivo para minimizar
+  49  INVNETO1(T) definicion 1 del inventario neto
+  50  INVNETO2(T) definicion 2 del inventario neto
+  51  WORKFORCE(T) conservacion de la fuerza de trabajo
+  52  PRODUCTION(T) relacion de la produccion y fuerza de trabajo
+  53  INVINICIAL inventario neto inicial
+  54  INVINICIALHAND inventario a la mano inicial
+  55  WFINICIAL fuerza de trabajo inicial
+  56  ;
+  57   
+  58  FO..                        z =e= SUM(T, c*P(T) + h*I(T) + CF*S(T) + CR*LR(T) + CO*LO(T) + CWplus*Wplus(T) + CWminus*Wminus(T) + Cutso*OUTSOURCE(T));
+  59  INVNETO1(T)$(ORD(T)>1)..    NI(T) =e= NI(T-1) + P(T) + OUTSOURCE(T) - Demand(T);
+  60  INVNETO2(T)$(ORD(T)>1)..    NI(T) =e= I(T) - S(T);
+  61  WORKFORCE(T)$(ORD(T)>1)..   LR(T) =e= LR(T-1) + Wplus(T) - Wminus(T);
+  62  PRODUCTION(T)..             P(T) =e= LR(T) + LO(T);
+  63  INVINICIAL..                NI("1") =e= 3000 + P("1") + OUTSOURCE("1") - Demand("1");
+  64  INVINICIALHAND..            NI("1") =e= I("1") - S("1");
+  65  WFINICIAL..                 LR("1") =e= 2880;
+  66   
+  67  model planeacionAgregada /all/;
+  68  solve planeacionAgregada using LP minimizing z;
+  69  display z.l, P.l, I.l, NI.l, LR.l, LO.l, S.l, Wplus.l, Wminus.l, OUTSOURCE.l;
+
+
+COMPILATION TIME     =        0.015 SECONDS      3 MB  54.3.1 61154be4 WEX-WEI
+GAMS 54.3.1  61154be4 Aug 21, 2026          WEX-WEI x86 64bit/MS Windows - 09/10/26 08:02:18 Page 2
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Equation Listing    SOLVE planeacionAgregada Using LP From line 68
+
+
+---- FO  =E=  definicion de la funcion objetivo para minimizar
+
+FO..  - 80*P(1) - 80*P(2) - 80*P(3) - 80*P(4) - 80*P(5) - 80*P(6) - 80*P(7) - 80*P(8) - 80*P(9) - 80*P(10) - 80*P(11) - 80*P(12) - 2.7*I(1) - 2.7*I(2) - 2.7*I(3) - 2.7*I(4) - 2.7*I(5) - 2.7*I(6) - 2.7*I(7) - 2.7*I(8) - 2.7*I(9) - 2.7*I(10) - 2.7*I(11) - 2.7*I(12) - 10000*S(1) - 10000*S(2) - 10000*S(3) - 10000*S(4) - 10000*S(5) - 10000*S(6) - 10000*S(7) - 10000*S(8) - 10000*S(9) - 10000*S(10) - 10000*S(11) - 10000*S(12) - 12*LR(1) - 12*LR(2) - 12*LR(3) - 12*LR(4) - 12*LR(5) - 12*LR(6) - 12*LR(7) - 12*LR(8) - 12*LR(9) - 12*LR(10) - 12*LR(11) - 12*LR(12) - 18*LO(1) - 18*LO(2) - 18*LO(3) - 18*LO(4) - 18*LO(5) - 18*LO(6) - 18*LO(7) - 18*LO(8) - 18*LO(9) - 18*LO(10) - 18*LO(11) - 18*LO(12) - 10*Wplus(1) - 10*Wplus(2) - 10*Wplus(3) - 10*Wplus(4) - 10*Wplus(5) - 10*Wplus(6) - 10*Wplus(7) - 10*Wplus(8) - 10*Wplus(9) - 10*Wplus(10) - 10*Wplus(11) - 10*Wplus(12) - 37*Wminus(1) - 37*Wminus(2) - 37*Wminus(3) - 37*Wminus(4) - 37*Wminus(5) - 37*Wminus(6) - 37*Wminus(7) - 37*Wminus(8) - 37*Wminus(9) - 37*Wminus(10) - 37*Wminus(11) - 37*Wminus(12) - 95*OUTSOURCE(1) - 95*OUTSOURCE(2) - 95*OUTSOURCE(3) - 95*OUTSOURCE(4) - 95*OUTSOURCE(5) - 95*OUTSOURCE(6) - 95*OUTSOURCE(7) - 95*OUTSOURCE(8) - 95*OUTSOURCE(9) - 95*OUTSOURCE(10) - 95*OUTSOURCE(11) - 95*OUTSOURCE(12) + z =E= 0 ; (LHS = 0)
+     
+
+---- INVNETO1  =E=  definicion 1 del inventario neto
+
+INVNETO1(2)..  - P(2) - OUTSOURCE(2) - NI(1) + NI(2) =E= -3400 ; (LHS = 0, INFES = 3400 ****)
+     
+INVNETO1(3)..  - P(3) - OUTSOURCE(3) - NI(2) + NI(3) =E= -3900 ; (LHS = 0, INFES = 3900 ****)
+     
+INVNETO1(4)..  - P(4) - OUTSOURCE(4) - NI(3) + NI(4) =E= -5300 ; (LHS = 0, INFES = 5300 ****)
+     
+REMAINING 8 ENTRIES SKIPPED
+
+
+---- INVNETO2  =E=  definicion 2 del inventario neto
+
+INVNETO2(2)..  - I(2) + S(2) + NI(2) =E= 0 ; (LHS = 0)
+     
+INVNETO2(3)..  - I(3) + S(3) + NI(3) =E= 0 ; (LHS = 0)
+     
+INVNETO2(4)..  - I(4) + S(4) + NI(4) =E= 0 ; (LHS = 0)
+     
+REMAINING 8 ENTRIES SKIPPED
+
+
+---- WORKFORCE  =E=  conservacion de la fuerza de trabajo
+
+WORKFORCE(2)..  - LR(1) + LR(2) - Wplus(2) + Wminus(2) =E= 0 ; (LHS = 0)
+     
+WORKFORCE(3)..  - LR(2) + LR(3) - Wplus(3) + Wminus(3) =E= 0 ; (LHS = 0)
+     
+WORKFORCE(4)..  - LR(3) + LR(4) - Wplus(4) + Wminus(4) =E= 0 ; (LHS = 0)
+     
+REMAINING 8 ENTRIES SKIPPED
+
+
+---- PRODUCTION  =E=  relacion de la produccion y fuerza de trabajo
+
+PRODUCTION(1)..  P(1) - LR(1) - LO(1) =E= 0 ; (LHS = 0)
+     
+PRODUCTION(2)..  P(2) - LR(2) - LO(2) =E= 0 ; (LHS = 0)
+     
+PRODUCTION(3)..  P(3) - LR(3) - LO(3) =E= 0 ; (LHS = 0)
+     
+REMAINING 9 ENTRIES SKIPPED
+
+
+---- INVINICIAL  =E=  inventario neto inicial
+
+INVINICIAL..  - P(1) - OUTSOURCE(1) + NI(1) =E= 400 ; (LHS = 0, INFES = 400 ****)
+     
+
+---- INVINICIALHAND  =E=  inventario a la mano inicial
+
+INVINICIALHAND..  - I(1) + S(1) + NI(1) =E= 0 ; (LHS = 0)
+     
+
+---- WFINICIAL  =E=  fuerza de trabajo inicial
+
+WFINICIAL..  LR(1) =E= 2880 ; (LHS = 0, INFES = 2880 ****)
+     
+GAMS 54.3.1  61154be4 Aug 21, 2026          WEX-WEI x86 64bit/MS Windows - 09/10/26 08:02:18 Page 3
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Column Listing      SOLVE planeacionAgregada Using LP From line 68
+
+
+---- P  produccion en el periodo t
+
+P(1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -80       FO
+        1       PRODUCTION(1)
+       -1       INVINICIAL
+
+P(2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -80       FO
+       -1       INVNETO1(2)
+        1       PRODUCTION(2)
+
+P(3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -80       FO
+       -1       INVNETO1(3)
+        1       PRODUCTION(3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- I  inventario a la mano en el periodo t
+
+I(1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -2.7     FO
+       -1       INVINICIALHAND
+
+I(2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -2.7     FO
+       -1       INVNETO2(2)
+
+I(3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -2.7     FO
+       -1       INVNETO2(3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- S  faltantes en el periodo T
+
+S(1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+   -10000       FO
+        1       INVINICIALHAND
+
+S(2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+   -10000       FO
+        1       INVNETO2(2)
+
+S(3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+   -10000       FO
+        1       INVNETO2(3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- LR  horas de trabajo en tiempo regular en el periodo T
+
+LR(1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -12       FO
+       -1       WORKFORCE(2)
+       -1       PRODUCTION(1)
+        1       WFINICIAL
+
+LR(2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -12       FO
+        1       WORKFORCE(2)
+       -1       WORKFORCE(3)
+       -1       PRODUCTION(2)
+
+LR(3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -12       FO
+        1       WORKFORCE(3)
+       -1       WORKFORCE(4)
+       -1       PRODUCTION(3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- LO  horas de trabajo extra en el periodo T
+
+LO(1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -18       FO
+       -1       PRODUCTION(1)
+
+LO(2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -18       FO
+       -1       PRODUCTION(2)
+
+LO(3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -18       FO
+       -1       PRODUCTION(3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- Wplus  aumento en la fuerza de trabajo en el periodo T
+
+Wplus(1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -10       FO
+
+Wplus(2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -10       FO
+       -1       WORKFORCE(2)
+
+Wplus(3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -10       FO
+       -1       WORKFORCE(3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- Wminus  reduccion en la fuerza de trabajo en el periodo T
+
+Wminus(1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -37       FO
+
+Wminus(2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -37       FO
+        1       WORKFORCE(2)
+
+Wminus(3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -37       FO
+        1       WORKFORCE(3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- OUTSOURCE  unidades subcontratadas en el periodo T
+
+OUTSOURCE(1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -95       FO
+       -1       INVINICIAL
+
+OUTSOURCE(2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -95       FO
+       -1       INVNETO1(2)
+
+OUTSOURCE(3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -95       FO
+       -1       INVNETO1(3)
+
+REMAINING 9 ENTRIES SKIPPED
+
+---- z  valor de la funcion objetivo
+
+z
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       FO
+
+
+---- NI  inventario neto
+
+NI(1)
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       INVNETO1(2)
+        1       INVINICIAL
+        1       INVINICIALHAND
+
+NI(2)
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       INVNETO1(2)
+       -1       INVNETO1(3)
+        1       INVNETO2(2)
+
+NI(3)
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       INVNETO1(3)
+       -1       INVNETO1(4)
+        1       INVNETO2(3)
+
+REMAINING 9 ENTRIES SKIPPED
+GAMS 54.3.1  61154be4 Aug 21, 2026          WEX-WEI x86 64bit/MS Windows - 09/10/26 08:02:18 Page 4
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Range Statistics    SOLVE planeacionAgregada Using LP From line 68
+
+
+RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
+
+RHS       [min, max] : [ 4.000E+02, 5.300E+03] - Zero values observed as well
+Bound     [min, max] : [        NA,        NA] - Zero values observed as well
+Matrix    [min, max] : [ 1.000E+00, 1.000E+04]
+
+GAMS 54.3.1  61154be4 Aug 21, 2026          WEX-WEI x86 64bit/MS Windows - 09/10/26 08:02:18 Page 5
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Model Statistics    SOLVE planeacionAgregada Using LP From line 68
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           8     SINGLE EQUATIONS           49
+BLOCKS OF VARIABLES          10     SINGLE VARIABLES          109
+NON ZERO ELEMENTS           261
+
+
+GENERATION TIME      =        0.079 SECONDS      4 MB  54.3.1 61154be4 WEX-WEI
+GAMS 54.3.1  61154be4 Aug 21, 2026          WEX-WEI x86 64bit/MS Windows - 09/10/26 08:02:18 Page 6
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+Solution Report     SOLVE planeacionAgregada Using LP From line 68
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   planeacionAgregada   OBJECTIVE  z
+     TYPE    LP                   DIRECTION  MINIMIZE
+     SOLVER  CPLEX                FROM LINE  68
+
+**** SOLVER STATUS     1 Normal Completion
+**** MODEL STATUS      1 Optimal
+**** OBJECTIVE VALUE          4062000.0000
+
+ RESOURCE USAGE, LIMIT          0.016 10000000000.000
+ ITERATION COUNT, LIMIT        28    2147483647
+*** This solver runs with a demo license. No commercial use.
+--- GMO setup time: 0.00s
+--- GMO memory 0.52 Mb (peak 0.52 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.01 Mb)
+--- Starting Cplex
+
+
+--- LP status (1): optimal.
+--- Cplex Time: 0.02sec (det. 0.15 ticks)
+
+
+Optimal solution found
+Objective:      4062000.000000
+
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU FO                  .              .              .             1.0000      
+
+  FO  definicion de la funcion objetivo para minimizar
+
+---- EQU INVNETO1  definicion 1 del inventario neto
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+2      -3400.0000     -3400.0000     -3400.0000       -89.6000      
+3      -3900.0000     -3900.0000     -3900.0000       -92.3000      
+4      -5300.0000     -5300.0000     -5300.0000       -95.0000      
+5      -4250.0000     -4250.0000     -4250.0000       -95.0000      
+6      -4200.0000     -4200.0000     -4200.0000       -95.0000      
+7      -3800.0000     -3800.0000     -3800.0000       -95.0000      
+8      -4500.0000     -4500.0000     -4500.0000       -95.0000      
+9      -4300.0000     -4300.0000     -4300.0000       -95.0000      
+10     -3800.0000     -3800.0000     -3800.0000       -95.0000      
+11     -3600.0000     -3600.0000     -3600.0000       -95.0000      
+12     -3000.0000     -3000.0000     -3000.0000       -77.7000      
+
+---- EQU INVNETO2  definicion 2 del inventario neto
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+2           .              .              .            -2.7000      
+3           .              .              .            -2.7000      
+4           .              .              .             EPS         
+5           .              .              .             EPS         
+6           .              .              .             EPS         
+7           .              .              .             EPS         
+8           .              .              .             EPS         
+9           .              .              .             EPS         
+10          .              .              .             EPS         
+11          .              .              .            17.3000      
+12          .              .              .            77.7000      
+
+---- EQU WORKFORCE  conservacion de la fuerza de trabajo
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+2           .              .              .            -7.6000      
+3           .              .              .           -10.0000      
+4           .              .              .            -9.7000      
+5           .              .              .            -6.7000      
+6           .              .              .            -3.7000      
+7           .              .              .            -0.7000      
+8           .              .              .             2.3000      
+9           .              .              .             5.3000      
+10          .              .              .             8.3000      
+11          .              .              .            11.3000      
+12          .              .              .            14.3000      
+
+---- EQU PRODUCTION  relacion de la produccion y fuerza de trabajo
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .              .              .            -6.9000      
+2           .              .              .            -9.6000      
+3           .              .              .           -12.3000      
+4           .              .              .           -15.0000      
+5           .              .              .           -15.0000      
+6           .              .              .           -15.0000      
+7           .              .              .           -15.0000      
+8           .              .              .           -15.0000      
+9           .              .              .           -15.0000      
+10          .              .              .           -15.0000      
+11          .              .              .           -15.0000      
+12          .              .              .             2.3000      
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU INVINICIAL       400.0000       400.0000       400.0000       -86.9000      
+---- EQU INVINICIA~          .              .              .            -2.7000      
+---- EQU WFINICIAL       2880.0000      2880.0000      2880.0000        -2.5000      
+
+  INVINICIAL  inventario neto inicial
+  INVINICIALHAND  inventario a la mano inicial
+  WFINICIAL  fuerza de trabajo inicial
+
+---- VAR P  produccion en el periodo t
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .          2880.0000        +INF             .          
+2           .          2880.0000        +INF             .          
+3           .          3000.0000        +INF             .          
+4           .          3000.0000        +INF             .          
+5           .          3000.0000        +INF             .          
+6           .          3000.0000        +INF             .          
+7           .          3000.0000        +INF             .          
+8           .          3000.0000        +INF             .          
+9           .          3000.0000        +INF             .          
+10          .          3000.0000        +INF             .          
+11          .          3000.0000        +INF             .          
+12          .          3000.0000        +INF             .          
+
+---- VAR I  inventario a la mano en el periodo t
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .          3280.0000        +INF             .          
+2           .          2760.0000        +INF             .          
+3           .          1860.0000        +INF             .          
+4           .              .            +INF            2.7000      
+5           .              .            +INF            2.7000      
+6           .              .            +INF            2.7000      
+7           .              .            +INF            2.7000      
+8           .              .            +INF            2.7000      
+9           .              .            +INF            2.7000      
+10          .              .            +INF            2.7000      
+11          .              .            +INF           20.0000      
+12          .              .            +INF           80.4000      
+
+---- VAR S  faltantes en el periodo T
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .              .            +INF        10002.7000      
+2           .              .            +INF        10002.7000      
+3           .              .            +INF        10002.7000      
+4           .              .            +INF        10000.0000      
+5           .              .            +INF        10000.0000      
+6           .              .            +INF        10000.0000      
+7           .              .            +INF        10000.0000      
+8           .              .            +INF        10000.0000      
+9           .              .            +INF        10000.0000      
+10          .              .            +INF        10000.0000      
+11          .              .            +INF         9982.7000      
+12          .              .            +INF         9922.3000      
+
+---- VAR LR  horas de trabajo en tiempo regular en el periodo T
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .          2880.0000        +INF             .          
+2           .          2880.0000        +INF             .          
+3           .          3000.0000        +INF             .          
+4           .          3000.0000        +INF             .          
+5           .          3000.0000        +INF             .          
+6           .          3000.0000        +INF             .          
+7           .          3000.0000        +INF             .          
+8           .          3000.0000        +INF             .          
+9           .          3000.0000        +INF             .          
+10          .          3000.0000        +INF             .          
+11          .          3000.0000        +INF             .          
+12          .          3000.0000        +INF             .          
+
+---- VAR LO  horas de trabajo extra en el periodo T
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .              .            +INF           11.1000      
+2           .              .            +INF            8.4000      
+3           .              .            +INF            5.7000      
+4           .              .            +INF            3.0000      
+5           .              .            +INF            3.0000      
+6           .              .            +INF            3.0000      
+7           .              .            +INF            3.0000      
+8           .              .            +INF            3.0000      
+9           .              .            +INF            3.0000      
+10          .              .            +INF            3.0000      
+11          .              .            +INF            3.0000      
+12          .              .            +INF           20.3000      
+
+---- VAR Wplus  aumento en la fuerza de trabajo en el periodo T
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .              .            +INF           10.0000      
+2           .              .            +INF            2.4000      
+3           .           120.0000        +INF             .          
+4           .              .            +INF            0.3000      
+5           .              .            +INF            3.3000      
+6           .              .            +INF            6.3000      
+7           .              .            +INF            9.3000      
+8           .              .            +INF           12.3000      
+9           .              .            +INF           15.3000      
+10          .              .            +INF           18.3000      
+11          .              .            +INF           21.3000      
+12          .              .            +INF           24.3000      
+
+---- VAR Wminus  reduccion en la fuerza de trabajo en el periodo T
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .              .            +INF           37.0000      
+2           .              .            +INF           44.6000      
+3           .              .            +INF           47.0000      
+4           .              .            +INF           46.7000      
+5           .              .            +INF           43.7000      
+6           .              .            +INF           40.7000      
+7           .              .            +INF           37.7000      
+8           .              .            +INF           34.7000      
+9           .              .            +INF           31.7000      
+10          .              .            +INF           28.7000      
+11          .              .            +INF           25.7000      
+12          .              .            +INF           22.7000      
+
+---- VAR OUTSOURCE  unidades subcontratadas en el periodo T
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1           .              .            +INF            8.1000      
+2           .              .            +INF            5.4000      
+3           .              .            +INF            2.7000      
+4           .           440.0000        +INF             .          
+5           .          1250.0000        +INF             .          
+6           .          1200.0000        +INF             .          
+7           .           800.0000        +INF             .          
+8           .          1500.0000        +INF             .          
+9           .          1300.0000        +INF             .          
+10          .           800.0000        +INF             .          
+11          .           600.0000        +INF             .          
+12          .              .            +INF           17.3000      
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR z                 -INF      4062000.0000        +INF             .          
+
+  z  valor de la funcion objetivo
+
+---- VAR NI  inventario neto
+
+          LOWER          LEVEL          UPPER         MARGINAL
+
+1         -INF         3280.0000        +INF             .          
+2         -INF         2760.0000        +INF             .          
+3         -INF         1860.0000        +INF             .          
+4         -INF             .            +INF             .          
+5         -INF             .            +INF             .          
+6         -INF             .            +INF             .          
+7         -INF             .            +INF             .          
+8         -INF             .            +INF             .          
+9         -INF             .            +INF             .          
+10        -INF             .            +INF             .          
+11        -INF             .            +INF             .          
+12        -INF             .            +INF             .          
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 54.3.1  61154be4 Aug 21, 2026          WEX-WEI x86 64bit/MS Windows - 09/10/26 08:02:18 Page 7
+G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
+E x e c u t i o n
+
+
+----     69 VARIABLE z.L                   =  4062000.000  valor de la funcion objetivo
+
+----     69 VARIABLE P.L  produccion en el periodo t
+
+1  2880.000,    2  2880.000,    3  3000.000,    4  3000.000,    5  3000.000,    6  3000.000,    7  3000.000,    8  3000.000,    9  3000.000,    10 3000.000,    11 3000.000,    12 3000.000
+
+
+----     69 VARIABLE I.L  inventario a la mano en el periodo t
+
+1 3280.000,    2 2760.000,    3 1860.000
+
+
+----     69 VARIABLE NI.L  inventario neto
+
+1 3280.000,    2 2760.000,    3 1860.000
+
+
+----     69 VARIABLE LR.L  horas de trabajo en tiempo regular en el periodo T
+
+1  2880.000,    2  2880.000,    3  3000.000,    4  3000.000,    5  3000.000,    6  3000.000,    7  3000.000,    8  3000.000,    9  3000.000,    10 3000.000,    11 3000.000,    12 3000.000
+
+
+----     69 VARIABLE LO.L  horas de trabajo extra en el periodo T
+
+                      ( ALL       0.000 )
+
+
+----     69 VARIABLE S.L  faltantes en el periodo T
+
+                      ( ALL       0.000 )
+
+
+----     69 VARIABLE Wplus.L  aumento en la fuerza de trabajo en el periodo T
+
+3 120.000
+
+
+----     69 VARIABLE Wminus.L  reduccion en la fuerza de trabajo en el periodo T
+
+                      ( ALL       0.000 )
+
+
+----     69 VARIABLE OUTSOURCE.L  unidades subcontratadas en el periodo T
+
+4   440.000,    5  1250.000,    6  1200.000,    7   800.000,    8  1500.000,    9  1300.000,    10  800.000,    11  600.000
+
+
+
+EXECUTION TIME       =        0.282 SECONDS      4 MB  54.3.1 61154be4 WEX-WEI
+
+
+USER: GAMS Demo, for EULA and demo limitations see   G260530+0003Cc-GEN
+      https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\samue\Desktop\U\S7\PLEANCION\MODELO DE FLUJO.gms
+Output     C:\Users\samue\Desktop\U\S7\PLEANCION\MODELO DE FLUJO.lst

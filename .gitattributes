@@ -1,0 +1,11 @@
+* text=auto
+*.md   text eol=lf
+*.py   text eol=lf
+*.ipynb text eol=lf
+*.gms  text
+*.lst  text
+*.csv  text
+*.pdf  binary
+*.xlsx binary
+*.xls  binary
+*.docx binary
