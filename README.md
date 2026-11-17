@@ -40,6 +40,19 @@ Cada archivo está en su formato original y además en **Markdown**, para poder 
 | [05 · Job shop](corte-3-programacion-scheduling/05-job-shop/README.md) | Job shop |
 | [Proyecto: competencia de scheduling (Willy Wonka y Monstruópolis)](corte-3-programacion-scheduling/proyecto-competencia-scheduling/README.md) · [Otros archivos](corte-3-programacion-scheduling/otros-archivos/README.md) | |
 
+## Usarlo en un Proyecto de claude.ai
+
+Un Proyecto tiene un límite de tamaño y el repositorio completo no cabe (ocupa unas 5 veces el límite). Por eso existe la carpeta **[`claude-proyectos/`](claude-proyectos/README.md)**, con paquetes que sí caben. En «Añadir contenido desde GitHub», desmarca todo y marca **solo una** de estas carpetas:
+
+| Carpeta | Qué contiene | Uso aprox. |
+|---|---|---|
+| `claude-proyectos/corte-1-completo/` | Corte 1 con todo el detalle | ~62 % |
+| `claude-proyectos/corte-2-completo/` | Corte 2 con todo el detalle | ~73 % |
+| `claude-proyectos/corte-3-completo/` | Corte 3 con todo el detalle, código incluido | ~67 % |
+| `claude-proyectos/curso-completo-resumido/` | Los tres cortes resumidos: índices, fórmulas, ejemplos, erratas | ~68 % |
+
+Para tener todo el detalle, crea un Proyecto por corte. Para un solo Proyecto, usa el resumido.
+
 ## Cómo está organizado
 
 ```
@@ -47,6 +60,8 @@ README.md      ← este mapa
 CLAUDE.md      ← guía para la IA: cómo leer el repo y dónde buscar cada cosa
 CATALOGO.md    ← todos los archivos: ruta nueva, nombre original y descripción
 ERRATAS.md     ← errores detectados en diapositivas, Excel y código, con su corrección
+claude-proyectos/  ← paquetes generados para Proyectos de claude.ai (no editar a mano)
+herramientas/      ← script que genera esos paquetes
 corte-N-…/
   README.md            ← temas del corte en orden de clase
   NN-tema/

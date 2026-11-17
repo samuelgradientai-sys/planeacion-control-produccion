@@ -42,6 +42,9 @@ Marcas que vas a encontrar en los `.md`:
 Además:
 - [`CATALOGO.md`](CATALOGO.md): **todos** los archivos, con su ruta nueva, su nombre original en la carpeta del estudiante y una descripción.
 - [`ERRATAS.md`](ERRATAS.md): **errores conocidos** de diapositivas, Excel y código, con su corrección. **Revísalo antes de citar una cifra.**
+- [`claude-proyectos/`](claude-proyectos/README.md): **copias generadas** de este mismo material, empaquetadas para que quepan en un Proyecto de claude.ai (un paquete completo por corte y uno resumido de todo el curso).
+  - Si estás leyendo el repositorio completo, ignora esa carpeta: repite lo que ya está en `corte-N-…/`.
+  - Se regenera con [`herramientas/generar_paquetes_claude.py`](herramientas/generar_paquetes_claude.py).
 
 ## Dónde buscar
 
